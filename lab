@@ -1,0 +1,58 @@
+import tkinter as tk 
+import random
+
+root = tk.Tk()
+root.title("Генератор паролей")
+root.geometry("550x400")
+root.configure(bg='lightblue')
+pas_def = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "q", "w", "u", "z", "x", "v"]
+pas_num = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+pas_spe = ["$", "%", "^", "&", "?", "=", "*", "_"]
+pas_spa = [" "]
+def_num = pas_num + pas_def
+def_spe = pas_def + pas_spe
+def_spa = pas_def + pas_spa
+
+
+enable_num = tk.IntVar()
+enable_spe = tk.IntVar()
+enable_spa = tk.IntVar()
+
+
+def randomPass_1():
+    stat_1 = enable_num.get()
+    stat_2 = enable_spe.get()
+    stat_3 = enable_spa.get()
+    num = int(spinbox.get())
+    if stat_1 == 1:
+        b = random.sample(def_num, num)
+        passwordbox.insert(tk.END, b)
+    elif stat_2 == 1:
+        c = random.sample(def_spe, num)
+        passwordbox.insert(tk.END, c)
+    elif stat_3 == 1:
+        d = random.sample(def_spa, num)
+        passwordbox.insert(tk.END, d)
+    else:
+        a = random.sample(pas_def, num)
+        passwordbox.insert(tk.END, a)
+
+spinbox = tk.Spinbox(from_=8.0, to=100.0)
+spinbox.pack(padx=10, pady=10)
+
+checkbutton_num = tk.Checkbutton(text="Включать цифры", variable=enable_num, offvalue="0", onvalue="1")
+checkbutton_num.pack(padx=0, pady=10)
+
+checkbutton_spec = tk.Checkbutton(text="Включать спецсимволы", variable=enable_spe, offvalue="0", onvalue="1")
+checkbutton_spec.pack(padx=0, pady=10)
+
+checkbutton_space = tk.Checkbutton(text="Включать пробелы", variable=enable_spa, offvalue="0", onvalue="1")
+checkbutton_space.pack(padx=0, pady=10)
+
+generic_button = tk.Button(text="Сгенерировать", font=("Arial", 12), command=randomPass_1)
+generic_button.pack(padx=10, pady=10)
+
+passwordbox=tk.Entry(root, width=40, font=("Arial", 12))
+passwordbox.pack(padx=10, pady=10)
+
+root.mainloop()
